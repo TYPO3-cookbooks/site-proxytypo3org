@@ -1,0 +1,15 @@
+{
+  "name": "review.typo3.org",
+  "nginx": {
+    "backend": "https://review.typo3.org:443"
+  },
+  "haproxy": {
+    "review-29418": {
+      "mode": "tcp",
+      "bind": ":::29418 v4v6",
+      "servers": [
+        "srv151 srv151.typo3.org:29418 check"
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "test_no_hsts.vagrant",
+  "nginx": {
+    "backend": "http://example.com:80",
+    "options": {
+      "add_header": {
+        "Strict-Transport-Security": "\"max-age=0\""
+      }
+    }
+  }
+}

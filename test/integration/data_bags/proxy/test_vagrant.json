@@ -1,0 +1,6 @@
+{
+  "name": "test.vagrant",
+  "nginx": {
+    "backend": "http://example.com:80"
+  }
+}
