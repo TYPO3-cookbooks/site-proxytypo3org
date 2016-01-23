@@ -24,7 +24,6 @@ sites.each do |site|
   nginx_conf_file site['name'] + "-redirect" do
     listen ["80", "[::]:80"]
     server_name site['name']
-    options site['nginx']['options'] || {}
     site_type :static
     options(
       "return" => "301 https://$server_name$request_uri"
