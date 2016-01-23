@@ -4,6 +4,14 @@
 #
 # Copyright (c) 2016 Steffen Gebert / TYPO3 Association
 
+# Optionally pin nginx version
+apt_preference "nginx" do
+  pin "version #{node['site-proxytypo3org']['nginx']['version']}"
+  pin_priority "700"
+  only_if { node['site-proxytypo3org']['nginx']['version'] }
+end
+
+# We do not use the OS's version, but use the one from nginx mainline
 include_recipe "nginx::repo"
 include_recipe "nginx::package"
 

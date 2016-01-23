@@ -5,6 +5,11 @@ ssl_certificate certname do
   ca_bundle_combined true
 end
 
+openssl_dhparam "#{node['ssl_certificates']['path']}/#{certname}.dh.pem" do
+  key_length 2048
+  generator 2
+  group "ssl-cert"
+end
 
 template File.join(node['nginx']['dir'], 'conf.d', 'ssl.conf') do
   source 'ssl.conf.erb'
