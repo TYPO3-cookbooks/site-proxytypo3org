@@ -10,5 +10,19 @@ default['nginx']['default_site_enabled'] = false
 default['nginx_conf']['options']['add_header'] = {
   "Strict-Transport-Security" => '"max-age=31536000; includeSubdomains; preload;"'
 }
+#<> Configure default locations for all vhosts
+default['nginx_conf']['locations'] = {
+  '/' => {
+    'proxy_set_header' => {
+      'Host' => '$http_host',
+      'X-Forwarded-For' => '$proxy_add_x_forwarded_for',
+      'X-Forwarded-Port' => '$server_port',
+      'X-Real-IP' => '$remote_addr',
+      'HTTPS' => 'on', # we only use HTTPS on this proxy (except for redirect vhosts)
+    },
+    'proxy_redirect' => 'off',
+    'proxy_pass' => nil
+  }
+}
 #<> We do not use unix sockets, so revert the stupid assumption by the [nginx_conf](https://github.com/tablexi/chef-nginx_conf) cookbook
 default['nginx_conf']['pre_socket'] = ''
