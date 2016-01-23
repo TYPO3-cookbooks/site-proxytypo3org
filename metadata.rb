@@ -4,7 +4,7 @@ maintainer_email "steffen.gebert@typo3.org"
 license          "Apache2"
 description      "Installs/Configures site-proxytypo3org"
 long_description "Installs/Configures site-proxytypo3org, the proxy in front of *.typo3.org"
-version          "1.0.4"
+version          "1.0.5"
 
 supports         "debian",     "> 8.0"
 
