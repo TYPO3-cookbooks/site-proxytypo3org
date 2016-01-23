@@ -18,3 +18,6 @@ include_recipe "nginx::package"
 include_recipe "#{cookbook_name}::_nginx_ssl"
 include_recipe "#{cookbook_name}::_nginx_config"
 include_recipe "#{cookbook_name}::_nginx_sites"
+
+# Zabbix check
+include_recipe "zabbix-custom-checks::nginx" unless node['dev_mode']
