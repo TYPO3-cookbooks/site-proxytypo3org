@@ -1,4 +1,5 @@
 {
+  "id": "test_no_hsts.vagrant",
   "name": "test_no_hsts.vagrant",
   "nginx": {
     "backend": "http://example.com:80",

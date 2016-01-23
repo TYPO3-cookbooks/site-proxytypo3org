@@ -1,4 +1,5 @@
 {
+  "id": "review.typo3.org",
   "name": "review.typo3.org",
   "nginx": {
     "backend": "https://review.typo3.org:443"

@@ -1,4 +1,5 @@
 {
+  "id": "test.typo3.org",
   "name": "test.typo3.org",
   "nginx": {
     "backend": "http://127.0.0.1:80"

@@ -1,4 +1,5 @@
 {
+  "id": "typo3.org",
   "name": "typo3.org",
   "nginx": {
     "backend": "http://srv107.typo3.org:80",
@@ -7,6 +8,9 @@
         "Strict-Transport-Security": "\"max-age=15768000; preload;\""
       },
       "locations": {
+        "~ /.svn/": {
+          "deny": "all"
+        },
         "/api/typo3cms": {
           "proxy_pass":  "http://api.typo3.org/typo3cms/current/html",
           "proxy_set_header": "Host api.typo3.org"
