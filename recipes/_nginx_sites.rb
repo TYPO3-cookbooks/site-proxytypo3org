@@ -27,6 +27,7 @@ sites.each do |site|
     # listen(
     #   ["80", "[::]:80"]
     # )
+    server_name site['name']
     options site['nginx']['options'] || {}
     site_type :static
     options(
