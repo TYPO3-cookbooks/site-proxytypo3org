@@ -9,6 +9,10 @@ sites = search(:proxy, "nginx:*")
 sites.each do |site|
   log "Processing nginx proxy site #{site}"
 
+  site_options = site['nginx']['options'] || {}
+  site_options["add_header"] = {} unless site_options["add_header"]
+  site_options["add_header"]["HTTPS"] = '"on"'
+
   # HTTPS vhost
   nginx_conf_file site['name'] do
     listen(
@@ -19,7 +23,7 @@ sites.each do |site|
     ssl {}
     template "nginx_site.erb"
     cookbook cookbook_name
-    options site['nginx']['options'] || {}
+    options site_options
   end
 
   # HTTP vhost, redirecting to HTTPS
@@ -28,7 +32,6 @@ sites.each do |site|
     #   ["80", "[::]:80"]
     # )
     server_name site['name']
-    options site['nginx']['options'] || {}
     site_type :static
     options(
       "return" => "301 https://$server_name$request_uri"
