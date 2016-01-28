@@ -9,8 +9,10 @@ default['nginx']['default_site_enabled'] = false
 #<> Set HTTP Strict Transport Security header by default
 default['nginx_conf']['options']['add_header'] = {
   "Strict-Transport-Security" => '"max-age=31536000; includeSubdomains; preload;"',
-  "X-Content-Type-Options" => "nosniff",
-  "X-Frame-Options" => "SAMEORIGIN",
+  "X-Content-Type-Options" => 'nosniff',
+  "X-Frame-Options" => 'SAMEORIGIN',
+  "X-XSS-Protection" => '"1; mode=block"',
+
 }
 #<> Configure default locations for all vhosts
 default['nginx_conf']['locations'] = {
