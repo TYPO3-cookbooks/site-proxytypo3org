@@ -8,7 +8,9 @@ default['site-proxytypo3org']['ssl_certificate'] = "wildcard.typo3.org"
 default['nginx']['default_site_enabled'] = false
 #<> Set HTTP Strict Transport Security header by default
 default['nginx_conf']['options']['add_header'] = {
-  "Strict-Transport-Security" => '"max-age=31536000; includeSubdomains; preload;"'
+  "Strict-Transport-Security" => '"max-age=31536000; includeSubdomains; preload;"',
+  "X-Content-Type-Options" => "nosniff",
+  "X-Frame-Options" => "SAMEORIGIN",
 }
 #<> Configure default locations for all vhosts
 default['nginx_conf']['locations'] = {
