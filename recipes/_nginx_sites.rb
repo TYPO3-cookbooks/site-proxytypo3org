@@ -30,10 +30,4 @@ sites.each do |site|
     )
   end
 
-  # directory File.join(node['nginx']['log_dir'], site['name']) do
-  #   owner node['nginx']['user']
-  #   group node['nginx']['group']
-  #   action :create
-  # end
-
 end
