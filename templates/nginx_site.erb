@@ -6,6 +6,8 @@ server {<% Array(@listen).each do |listen| %>
   server_name <%= Array(@server_name).join(' ') %>;
   <% if @ssl %>ssl on;<% end %>
   <% if @root %>root <%= @root %>;<% end %>
+  access_log <%= File.join(node['nginx']['log_dir'], Array(@server_name).first) %>-access.log combined;
+  error_log <%= File.join(node['nginx']['log_dir'], Array(@server_name).first) %>-error.log;
   <% Array(@block).each do |b| %>
 
   <%= b %>

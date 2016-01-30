@@ -29,4 +29,11 @@ sites.each do |site|
       "return" => "301 https://$server_name$request_uri"
     )
   end
+
+  # directory File.join(node['nginx']['log_dir'], site['name']) do
+  #   owner node['nginx']['user']
+  #   group node['nginx']['group']
+  #   action :create
+  # end
+
 end
