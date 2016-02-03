@@ -6,6 +6,8 @@ default['site-proxytypo3org']['nginx']['version'] = "1.9.9-1~jessie"
 default['site-proxytypo3org']['ssl_certificate'] = "wildcard.typo3.org"
 #<> Disable Nginx default site
 default['nginx']['default_site_enabled'] = false
+#<> Allow uploads of up to 25M
+default['nginx']['client_max_body_size'] = "25M"
 #<> Set HTTP Strict Transport Security header by default
 default['nginx_conf']['options']['add_header'] = {
   "Strict-Transport-Security" => '"max-age=31536000; includeSubdomains; preload;"',
