@@ -5,12 +5,13 @@
     "backend": "http://srv107.typo3.org:80",
     "options": {
       "add_header": {
-        "Strict-Transport-Security": "\"max-age=15768000; preload;\""
+        "Strict-Transport-Security": "\"max-age=15768000; preload;\"",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "\"1; mode=block\"",
+        "Content-Security-Policy-Report-Only": "\"script-src 'self' 'unsafe-inline' 'unsafe-eval' https://piwik.typo3.org; style-src 'self' 'unsafe-inline' ; report-uri https://report-uri.io/report/90234a82d771236e837f46bebcbe46a5/reportOnly\""
       },
       "locations": {
-        "~ /.svn/": {
-          "deny": "all"
-        },
         "/api/typo3cms": {
           "proxy_pass":  "http://api.typo3.org/typo3cms/current/html",
           "proxy_set_header": "Host api.typo3.org"
