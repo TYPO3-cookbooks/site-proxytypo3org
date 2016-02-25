@@ -9,4 +9,6 @@ include_recipe "#{cookbook_name}::_haproxy_sites"
 
 include_recipe "haproxy"
 
+# create the directory, where we want our stats socket
+directory "/var/run/haproxy"
 include_recipe "zabbix-custom-checks::haproxy"
