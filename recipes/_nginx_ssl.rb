@@ -3,6 +3,7 @@ include_recipe "ssl_certificates"
 certname = node['site-proxytypo3org']['ssl_certificate']
 ssl_certificate certname do
   ca_bundle_combined true
+  notifies :reload, "service[nginx]"
 end
 
 openssl_dhparam "#{node['ssl_certificates']['path']}/#{certname}.dh.pem" do
