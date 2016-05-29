@@ -1,0 +1,6 @@
+driver:
+  name: docker
+  use_sudo: false
+  provision_command:
+    - apt-get install wget -y
+    - mkdir /var/run/haproxy
