@@ -14,7 +14,7 @@ sites.each do |site|
     listen(["443 ssl http2", "[::]:443 ssl http2"])
     socket site['nginx']['backend']
     # using our custom template, we don't have to supply certificate/key data here..
-    ssl {}
+    ssl nil
     template "nginx_site.erb"
     cookbook cookbook_name
     options site['nginx']['options'] || {}

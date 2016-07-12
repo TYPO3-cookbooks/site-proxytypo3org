@@ -13,7 +13,7 @@
       ["#{listen} default", "[::]:#{listen} default"]
     )
     site_type :static
-    ssl {} if protocol == "https"
+    ssl nil if protocol == "https"
     template "nginx_site.erb"
     cookbook cookbook_name
     options(
