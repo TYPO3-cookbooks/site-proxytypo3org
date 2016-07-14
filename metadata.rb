@@ -4,7 +4,7 @@ maintainer_email "steffen.gebert@typo3.org"
 license          "Apache2"
 description      "Installs/Configures site-proxytypo3org"
 long_description "Installs/Configures site-proxytypo3org, the proxy in front of *.typo3.org"
-version          "1.0.12"
+version          "1.0.13"
 
 supports         "debian",     "> 8.0"
 
@@ -18,5 +18,3 @@ depends          "logrotate",  "= 1.9.2"
 depends          "haproxy",    "= 1.6.7"
 depends          "openssl",    "= 4.4.0"
 depends          "build-essential",      "= 2.2.4"
-
-depends "sysctl", "= 0.7.0"
