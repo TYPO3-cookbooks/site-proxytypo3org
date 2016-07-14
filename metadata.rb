@@ -18,5 +18,3 @@ depends          "logrotate",  "= 1.9.2"
 depends          "haproxy",    "= 1.6.7"
 depends          "openssl",    "= 4.4.0"
 depends          "build-essential",      "= 2.2.4"
-
-depends "sysctl", "= 0.7.0"
