@@ -11,4 +11,4 @@ include_recipe "haproxy"
 
 # create the directory, where we want our stats socket
 directory "/var/run/haproxy"
-include_recipe "zabbix-custom-checks::haproxy"
+include_recipe "zabbix-custom-checks::haproxy" unless node['dev_mode']
