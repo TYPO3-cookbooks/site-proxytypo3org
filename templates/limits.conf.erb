@@ -1,0 +1,10 @@
+limit_conn_zone $binary_remote_addr zone=addr:10m;
+
+#available zones
+limit_req_zone $binary_remote_addr zone=small:10m rate=50r/s;
+limit_req_zone $binary_remote_addr zone=medium:10m rate=150r/s;
+limit_req_zone $binary_remote_addr zone=large:10m rate=500r/s;
+
+#set default zone
+limit_conn addr 50;
+limit_req zone=small burst=150;

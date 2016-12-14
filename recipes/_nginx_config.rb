@@ -22,3 +22,8 @@
   end
 
 end
+
+template File.join(node['nginx']['dir'], 'conf.d', 'limits.conf') do
+  source 'limits.conf.erb'
+  notifies :reload, 'service[nginx]'
+end
