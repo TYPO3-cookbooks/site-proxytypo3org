@@ -17,6 +17,7 @@ sites.each do |site|
       bind hap_data['bind']
       mode hap_data['mode']
       servers hap_data['servers']
+      params hap_data['params']
     end
 
   end
