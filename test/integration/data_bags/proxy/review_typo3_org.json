@@ -9,7 +9,7 @@
       "mode": "tcp",
       "bind": ":::29418 v4v6",
       "servers": [
-        "srv151 srv151.typo3.org:29418 check"
+        "proxy-htznr proxy-htznr.typo3.org:29418 check"
       ]
     }
   }
