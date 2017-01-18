@@ -4,8 +4,16 @@
 # this recipe has to run _before_ site-proxytypo3org::_nginx_sites starts,
 # so we hook into a resource that runs bevore (in ::_nginx_config)
 
-nginx_conf_file "test.action.delete" do
-  listen(["443 ssl http2", "[::]:443 ssl http2"])
-  socket "http://example.org:80"
+log "Creating test site called test.action.delete"
+
+file "/etc/nginx/sites-available/test.action.delete" do
+  content "# This file should be deleted"
+  action :nothing
+  subscribes :create, "nginx_conf_file[default-http]", :before
+  end
+
+link "/etc/nginx/sites-enabled/test.action.delete" do
+  to "/etc/nginx/sites-available/test.action.delete"
+  action :nothing
   subscribes :create, "nginx_conf_file[default-http]", :before
 end

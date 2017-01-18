@@ -41,8 +41,10 @@ control 'nginx-1' do
   end
 
   # using action: delete, verify that the site got deleted (will be created in the test cookbook)
-  describe file('/etc/nginx/sites-enabled/test.action.delete') do
-    it { should_not exist }
+  %w{/etc/nginx/sites-enabled/test.action.delete /etc/nginx/sites-available/test.action.delete}.each do |file_to_be_deleted|
+    describe file(file_to_be_deleted) do
+      it { should_not exist }
+    end
   end
 end
 
