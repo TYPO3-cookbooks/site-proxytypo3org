@@ -1,0 +1,11 @@
+{
+  "id": "redirect.typo3.org",
+  "name": "redirect.typo3.org",
+  "nginx": {
+    // backend needs to be filled
+    "backend": "http://example.org:80",
+    "options": {
+      "return 301": "https://typo3.org"
+    }
+  }
+}

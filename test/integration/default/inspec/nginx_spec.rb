@@ -33,6 +33,11 @@ control 'nginx-1' do
     its('server_name') { should include 'review.typo3.org'}
     its('add_header') { should include 'Strict-Transport-Security "max-age=31536000; includeSubdomains; preload;"' }
   end
+
+  describe parse_config_file('/etc/nginx/sites-enabled/redirect.typo3.org', nginx_config_options) do
+    its('server_name') { should include 'redirect.typo3.org'}
+    its('return') { should include '301 https://typo3.org' }
+  end
 end
 
 control 'nginx-proxy' do
