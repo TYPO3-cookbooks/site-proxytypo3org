@@ -1,7 +1,10 @@
 DEPENDENCIES
+  apt
   site-proxytypo3org
     path: .
     metadata: true
+  site-proxytypo3org_test
+    path: test/fixtures/cookbooks/site-proxytypo3org_test
 
 GRAPH
   apache2 (3.2.2)
@@ -104,6 +107,7 @@ GRAPH
     ssl_certificates (>= 0.0.0)
     t3-base (~> 0.2.0)
     zabbix-custom-checks (~> 0.2.0)
+  site-proxytypo3org_test (0.0.0)
   ssl_certificates (1.1.3)
   sudo (2.6.0)
   sysctl (0.7.0)
