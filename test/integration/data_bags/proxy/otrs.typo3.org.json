@@ -1,0 +1,7 @@
+{
+  "id": "otrs.typo3.org",
+  "name": "otrs.typo3.org",
+  "nginx": {
+    "backend": "https://srv63.typo3.org:443"
+  }
+}
