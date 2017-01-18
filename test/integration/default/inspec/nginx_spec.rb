@@ -42,7 +42,7 @@ control 'nginx-1' do
 
   # using action: delete, verify that the site got deleted (will be created in the test cookbook)
   describe file('/etc/nginx/sites-enabled/redirect.typo3.org') do
-    ti { should_not exist }
+    it { should_not exist }
   end
 end
 
