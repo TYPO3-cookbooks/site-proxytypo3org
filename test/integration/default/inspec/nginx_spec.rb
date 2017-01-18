@@ -34,9 +34,15 @@ control 'nginx-1' do
     its('add_header') { should include 'Strict-Transport-Security "max-age=31536000; includeSubdomains; preload;"' }
   end
 
+  # specifying a 301 redirect
   describe parse_config_file('/etc/nginx/sites-enabled/redirect.typo3.org', nginx_config_options) do
     its('server_name') { should include 'redirect.typo3.org'}
     its('return') { should include '301 https://typo3.org' }
+  end
+
+  # using action: delete, verify that the site got deleted (will be created in the test cookbook)
+  describe file('/etc/nginx/sites-enabled/redirect.typo3.org') do
+    ti { should_not exist }
   end
 end
 

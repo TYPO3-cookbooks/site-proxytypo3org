@@ -1,0 +1,7 @@
+{
+  "id": "test_action_delete",
+  "name": "test.action.delete",
+  "nginx": {
+    "backend": "http://example.org:80",
+  }
+}

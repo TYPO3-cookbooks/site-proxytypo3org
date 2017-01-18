@@ -14,6 +14,7 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[site-proxytypo3org_test::create_site_to_delete]
       - recipe[site-proxytypo3org::default]
     attributes:
       site-proxytypo3org:
