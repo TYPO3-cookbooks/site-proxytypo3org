@@ -125,7 +125,7 @@ THe following actions are allowed:
 - `disable`: Disables a site but leaves configuration in `/etc/nginx/sites-available/`.
 
 
-```json
+```javascript
 {
   "id": "example.org",
   "name": "example.org",
