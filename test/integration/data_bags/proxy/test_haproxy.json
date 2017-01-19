@@ -1,0 +1,13 @@
+{
+  "id": "haproxytest.typo3.org",
+  "name": "haproxytest.typo3.org",
+  "haproxy": {
+    "test-12345": {
+      "mode": "tcp",
+      "bind": ":::12345 v4v6",
+      "servers": [
+        "localhost localhost:80 check"
+      ]
+    }
+  }
+}

@@ -15,6 +15,7 @@ suites:
   - name: default
     run_list:
       - recipe[site-proxytypo3org::default]
+      - recipe[site-proxytypo3org_test::create_site_to_delete]
     attributes:
       site-proxytypo3org:
         ssl_certificate: wildcard.vagrant

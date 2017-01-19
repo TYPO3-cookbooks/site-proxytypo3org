@@ -1,48 +1,3 @@
-# Description
-
-This cookbook empowers the proxy instances in front of (hopefully one day) all publicly reachable typo3.org sites.
-
-It installs
-
-* `nginx` for HTTPS termination (including redirect from HTTP to HTTPS)
-* `haproxy` for all other port redirections
-# Requirements
-
-## Platform:
-
-* debian (> 8.0)
-
-## Cookbooks:
-
-* t3-base (~> 0.2.0)
-* zabbix-custom-checks (~> 0.2.0)
-* ssl_certificates
-* nginx (= 2.7.6)
-* nginx_conf (= 1.0.1)
-* logrotate (= 1.9.2)
-* haproxy (= 1.6.7)
-* openssl (= 4.4.0)
-* build-essential (= 2.2.4)
-
-# Attributes
-
-* `node['haproxy']['incoming_address']` - Listen to IPv4 and IPv6. Defaults to `::`.
-* `node['haproxy']['enable_default_http']` - Disable the default http loadbalancer that the haproxy cookbook sets up. Defaults to `false`.
-* `node['haproxy']['global_options']['stats socket /var/run/haproxy/info.sock']` - Enable a stats socket that is readable e.g. for the zabbix user. Defaults to `mode 666 level user`.
-* `node['nginx']['upstream_repository']` - Use Nginx.org's mainline repo. Defaults to `http://nginx.org/packages/mainline/debian`.
-* `node['site-proxytypo3org']['nginx']['version']` - Use APT pinning to not accidently upgrade the version of `nginx`. Defaults to `1.9.9-1~jessie`.
-* `node['site-proxytypo3org']['ssl_certificate']` - Deploy our wildcard certificate. Defaults to `wildcard.typo3.org`.
-* `node['nginx']['default_site_enabled']` - Disable Nginx default site. Defaults to `false`.
-* `node['nginx']['client_max_body_size']` - Allow uploads of up to 25M. Defaults to `25M`.
-* `node['nginx']['proxy_read_timeout']` - Let slow TYPO3 some more time.. Defaults to `180`.
-* `node['nginx_conf']['options']['add_header']` - Set HTTP Strict Transport Security header by default. Defaults to `{ ... }`.
-* `node['nginx_conf']['locations']` - Configure default locations for all vhosts. Defaults to `{ ... }`.
-* `node['nginx_conf']['pre_socket']` - We do not use unix sockets, so revert the stupid assumption by the [nginx_conf](https://github.com/tablexi/chef-nginx_conf) cookbook. Defaults to ``.
-
-# Recipes
-
-* site-proxytypo3org::default
-
 # Data Bags
 
 This cookbook searches the `proxy` data bag and installs Nginx and/or HAproxy sites for each of them.
@@ -69,7 +24,7 @@ The basic data bag format looks as follows:
 
 If neither `nginx`, nor `haproxy` keys are specified, the data bag item is ignored.
 
-_Note:_ Fortunately, Chef / Ruby allows comments within data bag JSON. Please make use of that!
+_Note:_ Fortunately, Chef / Ruby allows comments within data bag JSON. Please make use of that! 
 
 ## Nginx Sites
 
@@ -92,7 +47,7 @@ Every proxy site needs a backend specified (minimum viable example):
 
 ### Parametrized Site
 
-Optionally, additional parameters can be specified using the `options` key:
+Optionally, additional parameters can be specified using the `options` key: 
 
 ```javascript
 {
@@ -121,8 +76,8 @@ The following snippet can be used send a redirect from subdomain `redirect.examp
 
 ```javascript
 {
-  "id": "redirect.typo3.org",
-  "name": "redirect.typo3.org",
+  "id": "redirect.example.org",
+  "name": "redirect.example.org",
   "nginx": {
     // backend needs to be filled
     "backend": "http://does.not.matter.example.org:80",
@@ -137,7 +92,7 @@ The following snippet can be used send a redirect from subdomain `redirect.examp
 
 THe following actions are allowed:
 
-- `create` (default): Create and enable the nginx vhost
+- `create` (default): Create and enable the nginx vhost 
 - `delete`: Disable and delete
 - `enable`: Enables a previously disbled site
 - `disable`: Disables a site but leaves configuration in `/etc/nginx/sites-available/`.
@@ -164,12 +119,12 @@ The `action` key can be specified both on top level, as well as below the `nginx
 
 For non-HTTP traffic, HAproxy serves for load balancing / redirection of traffic towards the backends.
 
-This setup makes use of the [`haproxy_lb`](https://github.com/sous-chefs/haproxy/blob/v2.0.2/README.md#haproxy_lb) resource from the [`haproxy`](https://supermarket.chef.io/cookbooks/haproxy) cookbook.
+This cookbook passes all data bag information to the [`haproxy_lb`](https://github.com/sous-chefs/haproxy/blob/v2.0.2/README.md#haproxy_lb) resource (implemented in [`site-proxytypo3org::_haproxy_sites`](https://github.com/TYPO3-cookbooks/site-proxytypo3org/blob/master/recipes/_haproxy_sites.rb)).
 
 ### Simple HAProxy Config
 
 The following minimum viable example forwards the proxies' port `12345` to `srv123.example.org:12345`
-
+ 
 ```javascript
 {
   "id": "foo.example.org",
@@ -194,7 +149,7 @@ If additional parameters for the HAproxy config need to be specified, these have
 ```javascript
 {
   "id": "parametrized.example.org",
-  "name": "parametrized.typo3.org",
+  "name": "parametrized.example.org",
   "haproxy": {
     "parametrized-12345": {
       "mode": "tcp",
@@ -215,9 +170,3 @@ If additional parameters for the HAproxy config need to be specified, these have
 ### Deletion
 
 There is no need to explicitly delete HAproxy configs. If the data bag item is removed, the next chef run will not include it anymore.
-
-# License and Maintainer
-
-Maintainer:: Steffen Gebert (<steffen.gebert@typo3.org>)
-
-License:: Apache2
