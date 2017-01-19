@@ -119,7 +119,7 @@ The `action` key can be specified both on top level, as well as below the `nginx
 
 For non-HTTP traffic, HAproxy serves for load balancing / redirection of traffic towards the backends.
 
-This setup makes use of the [`haproxy_lb`](https://github.com/sous-chefs/haproxy/blob/v2.0.2/README.md#haproxy_lb) resource from the [`haproxy`](https://supermarket.chef.io/cookbooks/haproxy) cookbook.
+This cookbook passes all data bag information to the [`haproxy_lb`](https://github.com/sous-chefs/haproxy/blob/v2.0.2/README.md#haproxy_lb) resource (implemented in [`site-proxytypo3org::_haproxy_sites`](https://github.com/TYPO3-cookbooks/site-proxytypo3org/blob/master/recipes/_haproxy_sites.rb)).
 
 ### Simple HAProxy Config
 
