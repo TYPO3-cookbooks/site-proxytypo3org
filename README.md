@@ -115,6 +115,24 @@ Optionally, additional parameters can be specified using the `options` key:
 }
 ```
 
+### Redirect
+
+The following snippet can be used send a redirect from subdomain `redirect.example.org` to `example.org`:
+
+```javascript
+{
+  "id": "redirect.typo3.org",
+  "name": "redirect.typo3.org",
+  "nginx": {
+    // backend needs to be filled
+    "backend": "http://does.not.matter.example.org:80",
+    "options": {
+      "return 301": "https://example.org"
+    }
+  }
+}
+```
+
 ### Actions / Deletion
 
 THe following actions are allowed:
@@ -140,6 +158,63 @@ THe following actions are allowed:
 ```
 
 The `action` key can be specified both on top level, as well as below the `nginx` key. The effect is the same: It will be only applied to Nginx (the HAprox cookbook does not need explicit deletion).
+
+
+## HAProxy Configs
+
+For non-HTTP traffic, HAproxy serves for load balancing / redirection of traffic towards the backends.
+
+This setup makes use of the [`haproxy_lb`](https://github.com/sous-chefs/haproxy/blob/v2.0.2/README.md#haproxy_lb) resource from the [`haproxy`](https://supermarket.chef.io/cookbooks/haproxy) cookbook.
+
+### Simple HAProxy Config
+
+The following minimum viable example forwards the proxies' port `12345` to `srv123.example.org:12345`
+
+```javascript
+{
+  "id": "foo.example.org",
+  "name": "foo.example.org",
+  "haproxy": {
+    "foo-12345": {
+      "mode": "tcp",
+      "bind": ":::12345 v4v6",
+      "servers": [
+        "srv123 srv123.example.org:12345 check"
+      ]
+    }
+  }
+}
+
+```
+
+### Parametrized Config
+
+If additional parameters for the HAproxy config need to be specified, these have to be supplied using `params`:
+
+```javascript
+{
+  "id": "parametrized.example.org",
+  "name": "parametrized.typo3.org",
+  "haproxy": {
+    "parametrized-12345": {
+      "mode": "tcp",
+      "bind": ":::12345 v4v6",
+      // parameters supplied to the haproxy_lb resource
+      "params": {
+        // don't close the connection too early
+        "timeout tunnel": "3m"
+      },
+      "servers": [
+        "srv123 srv123.example.org:12345 check"
+      ]
+    }
+  }
+}
+```
+
+### Deletion
+
+There is no need to explicitly delete HAproxy configs. If the data bag item is removed, the next chef run will not include it anymore.
 
 # License and Maintainer
 
