@@ -8,7 +8,7 @@ Example data bags can be found in the [`test/integration/data_bags/proxy/`](http
 
 The basic data bag format looks as follows:
 
-```json
+```javascript
 {
   "id": "example.org",
   "name": "example.org",
@@ -34,7 +34,7 @@ This cookbook passes all data bag information to the [`nginx_conf_file`](https:/
 
 Every proxy site needs a backend specified (minimum viable example):
 
-```json
+```javascript
 {
   "id": "example.org",
   "name": "example.org",
@@ -49,7 +49,7 @@ Every proxy site needs a backend specified (minimum viable example):
 
 Optionally, additional parameters can be specified using the `options` key: 
 
-```json
+```javascript
 {
   "id": "example.org",
   "name": "example.org",
