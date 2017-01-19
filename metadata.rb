@@ -8,7 +8,7 @@ version          "1.2.1"
 
 supports         "debian",     "> 8.0"
 
-depends          "t3-base",    "~> 0.2.0"
+depends          "t3-base",    "~> 0.2.59"
 depends          "zabbix-custom-checks", "~> 0.2.0"
 depends          "ssl_certificates"
 
