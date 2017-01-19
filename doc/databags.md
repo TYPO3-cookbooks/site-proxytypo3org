@@ -76,8 +76,8 @@ The following snippet can be used send a redirect from subdomain `redirect.examp
 
 ```javascript
 {
-  "id": "redirect.typo3.org",
-  "name": "redirect.typo3.org",
+  "id": "redirect.example.org",
+  "name": "redirect.example.org",
   "nginx": {
     // backend needs to be filled
     "backend": "http://does.not.matter.example.org:80",
@@ -149,7 +149,7 @@ If additional parameters for the HAproxy config need to be specified, these have
 ```javascript
 {
   "id": "parametrized.example.org",
-  "name": "parametrized.typo3.org",
+  "name": "parametrized.example.org",
   "haproxy": {
     "parametrized-12345": {
       "mode": "tcp",
