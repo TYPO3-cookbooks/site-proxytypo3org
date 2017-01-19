@@ -70,6 +70,24 @@ Optionally, additional parameters can be specified using the `options` key:
 }
 ```
 
+### Redirect
+
+The following snippet can be used send a redirect from subdomain `redirect.example.org` to `example.org`:
+
+```javascript
+{
+  "id": "redirect.typo3.org",
+  "name": "redirect.typo3.org",
+  "nginx": {
+    // backend needs to be filled
+    "backend": "http://does.not.matter.example.org:80",
+    "options": {
+      "return 301": "https://example.org"
+    }
+  }
+}
+```
+
 ### Actions / Deletion
 
 THe following actions are allowed:
