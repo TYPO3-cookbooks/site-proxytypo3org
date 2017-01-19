@@ -97,7 +97,7 @@ GRAPH
     packagecloud (>= 0.0.0)
     yum-epel (>= 0.0.0)
   screen (0.7.0)
-  site-proxytypo3org (1.2.0)
+  site-proxytypo3org (1.2.1)
     build-essential (= 2.2.4)
     haproxy (= 1.6.7)
     logrotate (= 1.9.2)
