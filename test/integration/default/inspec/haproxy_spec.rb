@@ -6,7 +6,7 @@ describe service('haproxy') do
   # it { should be_running }
 end
 
-describe port(29418) do
+describe port(12345) do
   it { should be_listening }
   # while it is reachable through IPv6, inspec does not recognize it,
   # as there's no "tcp" line in `netstat -ntl`
