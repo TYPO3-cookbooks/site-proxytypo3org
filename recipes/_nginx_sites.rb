@@ -15,6 +15,8 @@ sites.each do |site|
     raise "Action '#{specified_action}' for site #{site['name']} is invalid. Valid options are #{valid_actions.implode(', ')}" unless valid_actions.include? specified_action
   end
 
+  locations = Chef::Mixin::DeepMerge.deep_merge!(node['nginx_conf']['locations'], site['nginx']['locations'])
+
   # HTTPS vhost
   nginx_conf_file site['name'] do
     listen(["443 ssl http2", "[::]:443 ssl http2"])
@@ -23,6 +25,7 @@ sites.each do |site|
     ssl nil
     template "nginx_site.erb"
     cookbook cookbook_name
+    locations locations
     options site['nginx']['options'] || {}
     action specified_action || :create
   end
