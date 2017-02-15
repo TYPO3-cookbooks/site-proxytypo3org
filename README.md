@@ -14,13 +14,13 @@ It installs
 
 ## Cookbooks:
 
-* t3-base (~> 0.2.0)
+* t3-base (~> 0.2.59)
 * zabbix-custom-checks (~> 0.2.0)
 * ssl_certificates
 * nginx (= 2.7.6)
 * nginx_conf (= 1.0.1)
 * logrotate (= 1.9.2)
-* haproxy (= 1.6.7)
+* haproxy (= 2.0.2)
 * openssl (= 4.4.0)
 * build-essential (= 2.2.4)
 
@@ -92,7 +92,7 @@ Every proxy site needs a backend specified (minimum viable example):
 
 ### Parametrized Site
 
-Optionally, additional parameters can be specified using the `options` key:
+Optionally, additional parameters can be specified using the `options` and `locations` keys:
 
 ```javascript
 {
@@ -103,12 +103,12 @@ Optionally, additional parameters can be specified using the `options` key:
     "options": {
       "add_header": {
         "Strict-Transport-Security": "\"max-age=15768000; preload;\""
-      },
-      "locations": {
-        "/api/": {
-          "proxy_pass":  "http://api.example.org/",
-          "proxy_set_header": "Host api.example.org"
-        }
+      }
+    },
+    "locations": {
+      "/api/": {
+        "proxy_pass":  "http://api.example.org/",
+        "proxy_set_header": "Host api.example.org"
       }
     }
   }
@@ -121,8 +121,8 @@ The following snippet can be used send a redirect from subdomain `redirect.examp
 
 ```javascript
 {
-  "id": "redirect.typo3.org",
-  "name": "redirect.typo3.org",
+  "id": "redirect.example.org",
+  "name": "redirect.example.org",
   "nginx": {
     // backend needs to be filled
     "backend": "http://does.not.matter.example.org:80",
@@ -164,7 +164,7 @@ The `action` key can be specified both on top level, as well as below the `nginx
 
 For non-HTTP traffic, HAproxy serves for load balancing / redirection of traffic towards the backends.
 
-This setup makes use of the [`haproxy_lb`](https://github.com/sous-chefs/haproxy/blob/v2.0.2/README.md#haproxy_lb) resource from the [`haproxy`](https://supermarket.chef.io/cookbooks/haproxy) cookbook.
+This cookbook passes all data bag information to the [`haproxy_lb`](https://github.com/sous-chefs/haproxy/blob/v2.0.2/README.md#haproxy_lb) resource (implemented in [`site-proxytypo3org::_haproxy_sites`](https://github.com/TYPO3-cookbooks/site-proxytypo3org/blob/master/recipes/_haproxy_sites.rb)).
 
 ### Simple HAProxy Config
 
@@ -194,7 +194,7 @@ If additional parameters for the HAproxy config need to be specified, these have
 ```javascript
 {
   "id": "parametrized.example.org",
-  "name": "parametrized.typo3.org",
+  "name": "parametrized.example.org",
   "haproxy": {
     "parametrized-12345": {
       "mode": "tcp",
@@ -215,6 +215,7 @@ If additional parameters for the HAproxy config need to be specified, these have
 ### Deletion
 
 There is no need to explicitly delete HAproxy configs. If the data bag item is removed, the next chef run will not include it anymore.
+
 
 # License and Maintainer
 
