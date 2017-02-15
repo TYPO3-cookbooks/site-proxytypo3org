@@ -11,7 +11,14 @@ Gemfile.lock
 bin/*
 .bundle/*
 
+# test kitchen
 .kitchen/
 .kitchen.local.yml
-test/integration/data_bags/certificates/wildcard_typo3_org.json
-.idea/
+
+# Chef
+Berksfile.lock
+.zero-knife.rb
+Policyfile.lock.json
+
+# thor-scmversion
+VERSION

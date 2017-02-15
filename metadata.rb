@@ -4,7 +4,7 @@ maintainer_email "steffen.gebert@typo3.org"
 license          "Apache2"
 description      "Installs/Configures site-proxytypo3org"
 long_description "Installs/Configures site-proxytypo3org, the proxy in front of *.typo3.org"
-version          "1.3.0"
+version          IO.read(File.join(File.dirname(__FILE__), 'VERSION')) rescue '0.0.1'
 
 supports         "debian",     "> 8.0"
 
