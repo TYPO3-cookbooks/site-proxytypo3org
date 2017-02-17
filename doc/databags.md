@@ -47,7 +47,7 @@ Every proxy site needs a backend specified (minimum viable example):
 
 ### Parametrized Site
 
-Optionally, additional parameters can be specified using the `options` key: 
+Optionally, additional parameters can be specified using the `options` and `locations` keys: 
 
 ```javascript
 {
@@ -58,12 +58,12 @@ Optionally, additional parameters can be specified using the `options` key:
     "options": {
       "add_header": {
         "Strict-Transport-Security": "\"max-age=15768000; preload;\""
-      },
-      "locations": {
-        "/api/": {
-          "proxy_pass":  "http://api.example.org/",
-          "proxy_set_header": "Host api.example.org"
-        }
+      }
+    },
+    "locations": {
+      "/api/": {
+        "proxy_pass":  "http://api.example.org/",
+        "proxy_set_header": "Host api.example.org"
       }
     }
   }

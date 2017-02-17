@@ -25,12 +25,19 @@ control 'nginx-1' do
     its('processes') { should include 'nginx.conf' }
   end
 
+
   nginx_config_options = {
     assignment_re: /^\s*([a-z_]+)\s+(.*?)\s*;\s*$/,
     multiple_values: true
   }
-  describe parse_config_file('/etc/nginx/sites-enabled/review.typo3.org', nginx_config_options) do
-    its('server_name') { should include 'review.typo3.org'}
+
+  nginx_config_section = {
+    assignment_re: /^\s*([a-z_]+)\s+(.*?)\s*{\s*$/
+  }
+
+  # default parameters
+  describe parse_config_file('/etc/nginx/sites-enabled/test.vagrant', nginx_config_options) do
+    its('server_name') { should include 'test.vagrant'}
     its('add_header') { should include 'Strict-Transport-Security "max-age=31536000; includeSubdomains; preload;"' }
   end
 
@@ -38,6 +45,24 @@ control 'nginx-1' do
   describe parse_config_file('/etc/nginx/sites-enabled/redirect.typo3.org', nginx_config_options) do
     its('server_name') { should include 'redirect.typo3.org'}
     its('return') { should include '301 https://typo3.org' }
+  end
+
+  # specified locations in data bag (test for locations to exist)
+  describe parse_config_file('/etc/nginx/sites-enabled/test_location.example.org', nginx_config_section) do
+    its('location') { should include '/' }
+    its('location') { should include '/test' }
+    # just to verify that the test is correct
+    its('location') { should_not include '/something-that-does-not-exist' }
+  end
+
+  # specified locations in data bag (test for options to exist)
+  describe parse_config_file('/etc/nginx/sites-enabled/test_location.example.org', nginx_config_options) do
+    # specified in the data bag
+    its('proxy_http_version') { should include '1.1' }
+    # implicit from the data bag
+    its('proxy_pass') { should include 'http://192.0.2.1:80' }
+    # specified in the attributes
+    its('proxy_set_header') { should include 'Proxy ""' }
   end
 
   # using action: delete, verify that the site got deleted (will be created in the test cookbook)
