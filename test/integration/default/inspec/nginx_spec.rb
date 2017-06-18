@@ -8,7 +8,7 @@ control 'nginx-1' do
   end
 
   describe service('nginx') do
-    # it { should be_running }
+    it { should be_running }
   end
 
   [80, 443].each do |port|
@@ -36,12 +36,12 @@ control 'nginx-1' do
 
 
   nginx_config_options = {
-    assignment_re: /^\s*([a-z_]+)\s+(.*?)\s*;\s*$/,
+    assignment_regex: /^\s*([a-z_]+)\s+(.*?)\s*;\s*$/,
     multiple_values: true
   }
 
   nginx_config_section = {
-    assignment_re: /^\s*([a-z_]+)\s+(.*?)\s*{\s*$/
+    assignment_regex: /^\s*([a-z_]+)\s+(.*?)\s*{\s*$/
   }
 
   # default parameters
