@@ -11,18 +11,27 @@ control 'nginx-1' do
     # it { should be_running }
   end
 
-  describe port(80) do
-    it { should be_listening }
-    its('protocols') { should include 'tcp'}
-    its('protocols') { should include 'tcp6'}
-    its('processes') { should include 'nginx.conf' }
+  [80, 443].each do |port|
+    describe port(port) do
+      it { should be_listening }
+      its('protocols') { should include 'tcp'}
+      its('protocols') { should include 'tcp6'}
+    end
   end
 
-  describe port(443) do
-    it { should be_listening }
-    its('protocols') { should include 'tcp'}
-    its('protocols') { should include 'tcp6'}
-    its('processes') { should include 'nginx.conf' }
+  # nginx process names differ ('nginx.conf' vs 'nginx: master')
+  if os['family'] == 'debian' && os['release'].to_i <= 8
+    [80, 443].each do |port|
+      describe port(port) do
+        its('processes') { should include 'nginx.conf' }
+      end
+    end
+  else
+    [80, 443].each do |port|
+      describe port(port) do
+        its('processes') { should include 'nginx:' }
+      end
+    end
   end
 
 
@@ -92,15 +101,15 @@ control 'nginx-proxy' do
   # headers
   describe command('curl --head --insecure --resolve "typo3.org:443:127.0.0.1" https://typo3.org') do
     its('exit_status') { should eq 0 }
-    its('stdout') { should match /Strict-Transport-Security: max-age=15768000; preload;/ }
-    its('stdout') { should match /X-Content-Type-Options: nosniff/ }
-    its('stdout') { should match /X-Frame-Options: SAMEORIGIN/ }
-    its('stdout') { should match /XSS-Protection: 1; mode=block/ }
+    its('stdout') { should match /Strict-Transport-Security: max-age=15768000; preload;/i }
+    its('stdout') { should match /X-Content-Type-Options: nosniff/i }
+    its('stdout') { should match /X-Frame-Options: SAMEORIGIN/i }
+    its('stdout') { should match /XSS-Protection: 1; mode=block/i }
   end
 
   # do NOT set includeSubdomains flag for HSTS as this would break non-HTTPS subdomains
   describe command('curl --head --insecure --resolve "typo3.org:443:127.0.0.1" https://typo3.org') do
     its('exit_status') { should eq 0 }
-    its('stdout') { should_not match /Strict-Transport-Security: .*includeSubdomains/m }
+    its('stdout') { should_not match /Strict-Transport-Security: .*includeSubdomains/mi }
   end
 end
