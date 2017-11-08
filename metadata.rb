@@ -9,11 +9,11 @@ version          IO.read(File.join(File.dirname(__FILE__), 'VERSION')) rescue '0
 supports         "debian",     "> 8.0"
 
 depends          "t3-base",    "~> 0.2.59"
-depends          "zabbix-custom-checks", "~> 0.2.0"
+#depends          "zabbix-custom-checks", "~> 0.2.0"
 depends          "ssl_certificates"
 
-depends          "nginx",      "= 2.7.6"
-depends          "nginx_conf", "= 1.0.1"
+depends          "nginx",      "= 7.0.0"
+depends          "nginx_conf", "= 2.0.0"
 depends          "logrotate",  "= 1.9.2"
 depends          "haproxy",    "= 2.0.2"
 depends          "openssl",    "= 4.4.0"
