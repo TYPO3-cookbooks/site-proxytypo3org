@@ -14,26 +14,13 @@ control 'nginx-1' do
   [80, 443].each do |port|
     describe port(port) do
       it { should be_listening }
+      # this is currently broken in InSpec (because the now use "ss" instead of "netstat")
+      # https://github.com/chef/inspec/pull/2243
+      # its('processes') { should include 'nginx' }
       its('protocols') { should include 'tcp'}
       its('protocols') { should include 'tcp6'}
     end
   end
-
-  # nginx process names differ ('nginx.conf' vs 'nginx: master')
-  if os['family'] == 'debian' && os['release'].to_i <= 8
-    [80, 443].each do |port|
-      describe port(port) do
-        its('processes') { should include 'nginx.conf' }
-      end
-    end
-  else
-    [80, 443].each do |port|
-      describe port(port) do
-        its('processes') { should include 'nginx:' }
-      end
-    end
-  end
-
 
   nginx_config_options = {
     assignment_regex: /^\s*([a-z_]+)\s+(.*?)\s*;\s*$/,
