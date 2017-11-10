@@ -18,7 +18,7 @@ control 'nginx-1' do
       # this is currently broken in InSpec (because the now use "ss" instead of "netstat")
       # https://github.com/chef/inspec/pull/2243
       # its('processes') { should include 'nginx' }
-      its('protocols') { should include 'tcp'}
+      # its('protocols') { should include 'tcp'}
       its('protocols') { should include 'tcp6'}
     end
   end
