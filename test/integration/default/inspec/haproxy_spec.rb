@@ -8,6 +8,6 @@ end
 
 describe port(12345) do
   it { should be_listening }
-  its('protocols') { should include 'tcp'}
+  # its('protocols') { should include 'tcp6'}
   # its('processes') { should include 'haproxy' }
 end
