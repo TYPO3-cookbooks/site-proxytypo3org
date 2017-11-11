@@ -1,7 +1,8 @@
 #<> Use Nginx.org's mainline repo
 default['nginx']['upstream_repository'] = "http://nginx.org/packages/mainline/debian"
+version_map = {jessie: '1.9.9-1~jessie', stretch: '1.13.6-1~stretch'}
 #<> Use APT pinning to not accidently upgrade the version of `nginx`
-default['site-proxytypo3org']['nginx']['version'] = "1.13.6-1~stretch"
+default['site-proxytypo3org']['nginx']['version'] = version_map.fetch(node['lsb']['codename'].to_sym)
 #<> Deploy our wildcard certificate
 default['site-proxytypo3org']['ssl_certificate'] = "wildcard.typo3.org"
 #<> Disable Nginx default site

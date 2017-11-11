@@ -19,7 +19,7 @@ control 'nginx-1' do
       # https://github.com/chef/inspec/pull/2243
       # its('processes') { should include 'nginx' }
       its('protocols') { should include 'tcp'}
-      its('protocols') { should include 'tcp6'}
+      # its('protocols') { should include 'tcp6'}
     end
   end
 
