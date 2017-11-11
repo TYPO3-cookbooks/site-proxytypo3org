@@ -12,4 +12,4 @@ directory "/var/run/haproxy"
 
 include_recipe "haproxy::manual"
 
-#include_recipe "zabbix-custom-checks::haproxy" unless node['dev_mode']
+include_recipe "zabbix-custom-checks::haproxy" unless node['dev_mode']

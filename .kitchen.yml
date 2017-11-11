@@ -18,9 +18,20 @@ suites:
       - recipe[site-proxytypo3org::default]
       - recipe[site-proxytypo3org_test::create_site_to_delete]
     attributes:
+      # we cannot add zabbix-custom-checks, if we (by default) don't install zabbix
+      dev_mode: true
       site-proxytypo3org:
         ssl_certificate: wildcard.vagrant
     driver_config:
       network:
       - ["private_network", {ip: "192.168.88.18"}]
-      - ["forwarded_port", {guest: 22002, host: 22002, auto_correct: true}]
+  - name: monitoring
+    run_list:
+      - recipe[site-proxytypo3org::default]
+    attributes:
+      t3-base:
+        flags:
+          # test with zabbix
+          production: true
+      site-proxytypo3org:
+        ssl_certificate: wildcard.vagrant
