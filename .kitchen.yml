@@ -9,7 +9,6 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: debian-8.9
   - name: debian-9.1
 
 suites:
