@@ -3,6 +3,8 @@ source "https://supermarket.chef.io"
 
 metadata
 
+solver :ruby, :required
+
 def fixture(name)
   cookbook name, path: "test/fixtures/cookbooks/#{name}"
 end
