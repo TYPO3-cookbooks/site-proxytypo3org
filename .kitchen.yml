@@ -25,13 +25,13 @@ suites:
     driver_config:
       network:
       - ["private_network", {ip: "192.168.88.18"}]
-  - name: monitoring
-    run_list:
-      - recipe[site-proxytypo3org::default]
-    attributes:
-      t3-base:
-        flags:
-          # test with zabbix
-          production: true
-      site-proxytypo3org:
-        ssl_certificate: wildcard.vagrant
+#  - name: monitoring
+#    run_list:
+#      - recipe[site-proxytypo3org::default]
+#    attributes:
+#      t3-base:
+#        flags:
+#          # test with zabbix
+#          production: true
+#      site-proxytypo3org:
+#        ssl_certificate: wildcard.vagrant
