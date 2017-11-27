@@ -26,6 +26,7 @@ default['nginx_conf']['locations'] = {
       'Host' => '$http_host',
       'X-Forwarded-For' => '$proxy_add_x_forwarded_for',
       'X-Forwarded-Port' => '$server_port',
+      'X-Forwarded-Proto' => '$scheme',
       'X-Real-IP' => '$remote_addr',
       'HTTPS' => 'on', # we only use HTTPS on this proxy (except for redirect vhosts)
       'Proxy' => '""', # mitigate httpoxy vulnerability
