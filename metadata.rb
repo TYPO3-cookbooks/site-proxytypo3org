@@ -12,6 +12,7 @@ depends          "t3-base",    "~> 0.2.59"
 depends          "zabbix-custom-checks", "~> 0.2.0"
 depends          "ssl_certificates"
 
+depends          "build-essential" # this conflicts pretty easily with other cookbooks' versions, so leave version unspecified
 depends          "nginx",      "= 7.0.0"
 depends          "nginx_conf", "= 2.0.0"
 depends          "logrotate",  "= 1.9.2"
