@@ -17,12 +17,15 @@ It installs
 * t3-base (~> 0.2.59)
 * zabbix-custom-checks (~> 0.2.0)
 * ssl_certificates
-* nginx (= 2.7.6)
-* nginx_conf (= 1.0.1)
+* build-essential
+* nginx (= 7.0.0)
+* nginx_conf (= 2.0.0)
 * logrotate (= 1.9.2)
 * haproxy (= 2.0.2)
 * openssl (= 4.4.0)
-* build-essential (= 2.2.4)
+* #<Logger:0x00007fcf1a9ec690> () (Recommended but not required)
+* #<Logger:0x00007fcf1a9ec690> () (Suggested but not required)
+* Conflicts with #<Logger:0x00007fcf1a9ec690> ()
 
 # Attributes
 
@@ -30,7 +33,7 @@ It installs
 * `node['haproxy']['enable_default_http']` - Disable the default http loadbalancer that the haproxy cookbook sets up. Defaults to `false`.
 * `node['haproxy']['global_options']['stats socket /var/run/haproxy/info.sock']` - Enable a stats socket that is readable e.g. for the zabbix user. Defaults to `mode 666 level user`.
 * `node['nginx']['upstream_repository']` - Use Nginx.org's mainline repo. Defaults to `http://nginx.org/packages/mainline/debian`.
-* `node['site-proxytypo3org']['nginx']['version']` - Use APT pinning to not accidently upgrade the version of `nginx`. Defaults to `1.9.9-1~jessie`.
+* `node['site-proxytypo3org']['nginx']['version']` - Use APT pinning to not accidently upgrade the version of `nginx`. Defaults to `version_map.fetch(node['lsb']['codename'].to_sym)`.
 * `node['site-proxytypo3org']['ssl_certificate']` - Deploy our wildcard certificate. Defaults to `wildcard.typo3.org`.
 * `node['nginx']['default_site_enabled']` - Disable Nginx default site. Defaults to `false`.
 * `node['nginx']['client_max_body_size']` - Allow uploads of up to 25M. Defaults to `25M`.
@@ -220,5 +223,7 @@ There is no need to explicitly delete HAproxy configs. If the data bag item is r
 # License and Maintainer
 
 Maintainer:: Steffen Gebert (<steffen.gebert@typo3.org>)
+
+
 
 License:: Apache2
