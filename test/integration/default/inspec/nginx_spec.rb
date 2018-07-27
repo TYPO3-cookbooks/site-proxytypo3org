@@ -83,7 +83,7 @@ control 'nginx-proxy' do
   # port 443 to typo3.org works
   describe command('curl --insecure --resolve "typo3.org:443:127.0.0.1" https://typo3.org') do
     its('exit_status') { should eq 0 }
-    its('stdout') { should include 'TYPO3 - The Enterprise Open Source CMS' }
+    its('stdout') { should include 'Download TYPO3' }
   end
 
   # headers
