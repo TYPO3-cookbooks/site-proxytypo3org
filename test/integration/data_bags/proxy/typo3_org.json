@@ -2,18 +2,25 @@
   "id": "typo3.org",
   "name": "typo3.org",
   "nginx": {
-    "backend": "http://srv107.typo3.org:80",
+    "backend": "http://srv193.typo3.org:80",
     "options": {
       "add_header": {
         "Strict-Transport-Security": "\"max-age=15768000; preload;\"",
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "SAMEORIGIN",
-        "X-XSS-Protection": "\"1; mode=block\"",
-        "Content-Security-Policy-Report-Only": "\"script-src 'self' 'unsafe-inline' 'unsafe-eval' https://piwik.typo3.org; style-src 'self' 'unsafe-inline' ; report-uri https://report-uri.io/report/90234a82d771236e837f46bebcbe46a5/reportOnly\""
+        "X-XSS-Protection": "\"1; mode=block\""
+      },
+      "rewrite": {
+        "^\/fileadmin\/ter\/(.*)$": "https://extensions.typo3.org/fileadmin/ter/$1 last",
+        "^\/extensions\/repository\/view\/(.+?(?=/))": "https://extensions.typo3.org/extension/$1/ last",
+        "^\/extensions\/repository\/view\/(.*)$": "https://extensions.typo3.org/extension/$1 last",
+        "^\/extensions\/repository\/download\/(.+?(?=\/))\/(.+?(?=\/))\/(.+?(?=\/))/": " https://extensions.typo3.org/extension/download/$1/$2/$3/ last",
+        "^\/extensions\/repository": "https://extensions.typo3.org/ last",
+        "^\/wsdl\/tx_ter_wsdl.php": "https://extensions.typo3.org/wsdl/tx_ter_wsdl.php last"
       },
       "locations": {
         "/api/typo3cms": {
-          "proxy_pass":  "http://api.typo3.org/typo3cms/current/html",
+          "proxy_pass": "http://api.typo3.org/typo3cms/current/html",
           "proxy_set_header": "Host api.typo3.org"
         }
       }
