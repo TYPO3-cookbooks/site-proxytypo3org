@@ -19,6 +19,12 @@ default['nginx_conf']['options']['add_header'] = {
   "X-XSS-Protection" => '"1; mode=block"',
 
 }
+default['nginx_conf']['options']['proxy_hide_header'] = [
+  'Strict-Transport-Security',
+  'X-Content-Type-Options',
+  'X-Frame-Options',
+  'X-XSS-Protection'
+]
 #<> Configure default locations for all vhosts
 default['nginx_conf']['locations'] = {
   '/' => {
