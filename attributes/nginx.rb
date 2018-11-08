@@ -7,6 +7,8 @@ default['site-proxytypo3org']['nginx']['version'] = version_map.fetch(node['lsb'
 default['site-proxytypo3org']['ssl_certificate'] = "wildcard.typo3.org"
 #<> Disable Nginx default site
 default['nginx']['default_site_enabled'] = false
+#<> Disable server tokens
+default['nginx']['server_tokens'] = 'off'
 #<> Allow uploads of up to 25M
 default['nginx']['client_max_body_size'] = "25M"
 #<> Let slow TYPO3 some more time..
