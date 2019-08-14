@@ -13,6 +13,8 @@ default['nginx']['server_tokens'] = 'off'
 default['nginx']['client_max_body_size'] = "25M"
 #<> Let slow TYPO3 some more time..
 default['nginx']['proxy_read_timeout'] = "180"
+#<> raise variables_hash_bucket_size
+default['nginx']['variables_hash_bucket_size'] = '128'
 #<> Set HTTP Strict Transport Security header by default
 default['nginx_conf']['options']['add_header'] = {
   "Strict-Transport-Security" => '"max-age=31536000; includeSubdomains; preload;"',
